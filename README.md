@@ -1,8 +1,9 @@
 # Task List - Workshop Preparation
 
 ## to-Do
-- [ ] Create Slack Channel.
+- [x] Create Slack Channel.
 - [ ] Create Actual Workshop Github Repository.
+- [ ] Discuss and decide the direction of the workshop.
 
 ## Initial Decisions
 
