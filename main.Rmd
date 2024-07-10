@@ -1,0 +1,63 @@
+---
+title: "Shiny Workshop ISAP"
+author: "Ciampitti Lab"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    source_code: embed
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(flexdashboard)
+library(jsonlite)
+library(httr)
+
+# Loading the data
+# Fetch the raw JSON text
+url <- "https://croptrials.cisdeli.dev/data/raw/corn-2023-2023"
+response <- GET(url)
+json_text <- content(response, as = "text", encoding = "UTF-8")
+
+# Replace NaN with null
+json_text <- gsub("NaN", "null", json_text)
+
+# Parsing clean data to JSON
+df <- fromJSON(json_text)
+```
+
+Template
+=====================================  
+    
+Column {data-width=600}
+-------------------------------------
+    
+### Chart 1
+    
+```{r}
+ggplot(df[df$COUNTY_CITY == "RILEY", ], aes(x = YIELD, y = NAME, color = WATER_REGIME)) +
+    geom_bar(stat = "identity") +
+    labs(title = "Yield by Hybrid", x = "Yield", y = "Genotype")
+```
+   
+Column {data-width=400}
+-------------------------------------
+   
+### Chart 2
+
+```{r}
+ggplot(df[df$COUNTY_CITY == "SHAWNEE", ], aes(x = YIELD, y = NAME, color = WATER_REGIME)) +
+    geom_bar(stat = "identity") +
+    labs(title = "Yield by Hybrid", x = "Yield", y = "Genotype")
+```   
+ 
+### Chart 3
+    
+```{r}
+ggplot(df[df$COUNTY_CITY == "FRANKLIN", ], aes(x = YIELD, y = NAME, color = WATER_REGIME)) +
+    geom_bar(stat = "identity") +
+    labs(title = "Yield by Hybrid", x = "Yield", y = "Genotype")
+```
+
+Now try to built it yourself! {data-orientation=rows}
+=====================================     
