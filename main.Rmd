@@ -5,6 +5,7 @@ output:
   flexdashboard::flex_dashboard:
     orientation: rows
     source_code: embed
+runtime: shiny
 ---
 
 ```{r setup, include=FALSE}
@@ -14,16 +15,7 @@ library(jsonlite)
 library(httr)
 
 # Loading the data
-# Fetch the raw JSON text
-url <- "https://croptrials.cisdeli.dev/data/raw/corn-2023-2023"
-response <- GET(url)
-json_text <- content(response, as = "text", encoding = "UTF-8")
-
-# Replace NaN with null
-json_text <- gsub("NaN", "null", json_text)
-
-# Parsing clean data to JSON
-df <- fromJSON(json_text)
+df <- iris
 ```
 
 Template
@@ -35,9 +27,12 @@ Column {data-width=600}
 ### Chart 1
     
 ```{r}
-ggplot(df[df$COUNTY_CITY == "RILEY", ], aes(x = YIELD, y = NAME, color = WATER_REGIME)) +
-    geom_bar(stat = "identity") +
-    labs(title = "Yield by Hybrid", x = "Yield", y = "Genotype")
+renderPlot({
+  ggplot(df, aes_string(x = input$scatter_x_var, y = input$scatter_y_var, color = "Species")) +
+    geom_point(size = 3) +
+    labs(title = paste("Scatter Plot of", input$scatter_x_var, "x", input$scatter_y_var)) +
+    theme_minimal()
+})
 ```
    
 Column {data-width=400}
@@ -46,18 +41,76 @@ Column {data-width=400}
 ### Chart 2
 
 ```{r}
-ggplot(df[df$COUNTY_CITY == "SHAWNEE", ], aes(x = YIELD, y = NAME, color = WATER_REGIME)) +
-    geom_bar(stat = "identity") +
-    labs(title = "Yield by Hybrid", x = "Yield", y = "Genotype")
+renderPlot({
+  ggplot(df, aes_string(x = input$hist_var)) +
+    geom_histogram(bins = input$hist_bins, fill = "blue", alpha = 0.7) +
+    labs(title = paste("Histogram of", input$hist_var, "with", input$hist_bins, "Bins"), x = input$hist_var, y = "Frequency") +
+    theme_minimal()
+})
 ```   
  
 ### Chart 3
     
 ```{r}
-ggplot(df[df$COUNTY_CITY == "FRANKLIN", ], aes(x = YIELD, y = NAME, color = WATER_REGIME)) +
-    geom_bar(stat = "identity") +
-    labs(title = "Yield by Hybrid", x = "Yield", y = "Genotype")
+renderPlot({
+  ggplot(df, aes_string(x = "Species", y = input$boxplot_y_var, fill = "Species")) +
+    geom_boxplot() +
+    labs(title = paste("Box Plot of", input$boxplot_y_var, "by Species"), x = "Species", y = input$boxplot_y_var) +
+    theme_minimal()
+})
+```
+
+Inputs {.sidebar}
+-------------------------------------
+### Chart 1 Dropdowns
+
+```{r}
+selectInput(
+  "scatter_x_var", 
+  label = h5("X axis variable"), 
+  choices = names(df)[1:4],
+  selected = "Sepal.Width"
+)
+
+selectInput(
+  "scatter_y_var", 
+  label = h5("Y axis variable"), 
+  choices = names(df)[1:4],
+  selected = "Sepal.Length"
+)
+```
+
+### Chart 2 Dropdowns
+
+```{r}
+selectInput(
+  "hist_var", 
+  label = h5("X axis variable"), 
+  choices = names(df)[1:4],
+  selected = "Sepal.Length"
+)
+
+sliderInput(
+  "hist_bins", 
+  label = h5("Number of bins"),
+  min = 5,
+  max = 50,
+  value = 20
+)
+```
+
+### Chart 3 Dropdowns
+
+```{r}
+selectInput(
+  "boxplot_y_var", 
+  label = h5("Y axis variable"), 
+  choices = names(df)[1:4],
+  selected = "Sepal.Length"
+)
 ```
 
 Now try to built it yourself! {data-orientation=rows}
-=====================================     
+=====================================
+
+
