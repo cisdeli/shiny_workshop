@@ -19,46 +19,7 @@ df <- iris
 ```
 
 Template
-=====================================  
-    
-Column {data-width=600}
--------------------------------------
-    
-### Chart 1
-    
-```{r}
-renderPlot({
-  ggplot(df, aes_string(x = input$scatter_x_var, y = input$scatter_y_var, color = "Species")) +
-    geom_point(size = 3) +
-    labs(title = paste("Scatter Plot of", input$scatter_x_var, "x", input$scatter_y_var)) +
-    theme_minimal()
-})
-```
-   
-Column {data-width=400}
--------------------------------------
-   
-### Chart 2
-
-```{r}
-renderPlot({
-  ggplot(df, aes_string(x = input$hist_var)) +
-    geom_histogram(bins = input$hist_bins, fill = "blue", alpha = 0.7) +
-    labs(title = paste("Histogram of", input$hist_var, "with", input$hist_bins, "Bins"), x = input$hist_var, y = "Frequency") +
-    theme_minimal()
-})
-```   
- 
-### Chart 3
-    
-```{r}
-renderPlot({
-  ggplot(df, aes_string(x = "Species", y = input$boxplot_y_var, fill = "Species")) +
-    geom_boxplot() +
-    labs(title = paste("Box Plot of", input$boxplot_y_var, "by Species"), x = "Species", y = input$boxplot_y_var) +
-    theme_minimal()
-})
-```
+=====================================
 
 Inputs {.sidebar}
 -------------------------------------
@@ -66,7 +27,7 @@ Inputs {.sidebar}
 
 ```{r}
 selectInput(
-  "scatter_x_var", 
+  "scatter_x_var", # Input ID
   label = h5("X axis variable"), 
   choices = names(df)[1:4],
   selected = "Sepal.Width"
@@ -108,6 +69,51 @@ selectInput(
   choices = names(df)[1:4],
   selected = "Sepal.Length"
 )
+```
+    
+Column {data-width=600}
+-------------------------------------
+    
+### Chart 1
+    
+```{r}
+output$scatter_plot <- renderPlot({
+  ggplot(df, aes_string(x = input$scatter_x_var, y = input$scatter_y_var, color = "Species")) +
+    geom_point(size = 3) +
+    labs(title = paste("Scatter Plot of", input$scatter_x_var, "x", input$scatter_y_var)) +
+    theme_minimal()
+})
+
+plotOutput("scatter_plot")
+```
+   
+Column {data-width=400}
+-------------------------------------
+   
+### Chart 2
+
+```{r}
+output$hist_out <- renderPlot({
+  ggplot(df, aes_string(x = input$hist_var)) +
+    geom_histogram(bins = input$hist_bins, fill = "blue", alpha = 0.7) +
+    labs(title = paste("Histogram of", input$hist_var, "with", input$hist_bins, "Bins"), x = input$hist_var, y = "Frequency") +
+    theme_minimal()
+})
+
+plotOutput("hist_out")
+```   
+ 
+### Chart 3
+    
+```{r}
+output$boxplot_out <- renderPlot({
+  ggplot(df, aes_string(x = "Species", y = input$boxplot_y_var, fill = "Species")) +
+    geom_boxplot() +
+    labs(title = paste("Box Plot of", input$boxplot_y_var, "by Species"), x = "Species", y = input$boxplot_y_var) +
+    theme_minimal()
+})
+
+plotOutput("boxplot_out")
 ```
 
 Now try to built it yourself! {data-orientation=rows}
