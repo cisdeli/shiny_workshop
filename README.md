@@ -10,10 +10,10 @@ While previous knowledge of Rmd and Markdown is not required, it is recommended 
 ## Requirements
 
 * R and RStudio.
-* Install Shiny and flexdashboard with:
+* Install Shiny, flexdashboard and tidyverse with:
 
 ```bash
-install.packages(c('shiny', 'flexdashboard'))
+install.packages(c('shiny', 'flexdashboard', 'tidyverse'))
 ```
 
 ## Files description
