@@ -1,31 +1,31 @@
-# Task List - Workshop Preparation
+# ISPA 2024 - Shiny Workshop 
 
-## to-Do
-- [x] Create Slack Channel.
-- [x] Create Actual Workshop Github Repository.
-- [x] Discuss and decide the direction of the workshop.
-- [ ] Get email list of participants.
-- [ ] Email with stuff to prepare previous to the workshop.
-    * R and RStudio.
-    * Shiny.
-    * Flexdashboard.
-- [ ] Create the template.
-- [ ] Create the slides.
-- [ ] Decide dataset.
+## Introduction
 
-## Initial Decisions
+This repository contains the materials for the Shiny Workshop at ISPA 2024. 
+The workshop will cover the basics of Shiny, with a focus on using flexdashboard.
+You will learn how to quickly create a dashboard using R Markdown (Rmd) and Shiny.
+While previous knowledge of Rmd and Markdown is not required, it is recommended for a smoother learning experience.
 
-* Plain Shiny App, Shiny Dashboard or Flexdashboard?
-    * Flex!
-* Straight app creation or give R/general programming/Rstudio context first?
-    * Straight to the app.
-* Teach by building an app or by showing the concepts of the framework?
+## Requirements
 
-## Agenda
-* Steps to make an App.
-    * What you want? Graphs/Widgets.
-    * How sketch it?
-* Flex Intro.
-* Explain Template.
-* Dive further into tab2.
-* Advanced stuff. CSS/Deploying.
+* R and RStudio.
+* Install Shiny and flexdashboard with:
+
+```bash
+install.packages(c('shiny', 'flexdashboard'))
+```
+
+## Files description
+
+* `slides.pptx`: Contains the slides for the workshop.
+* `main.Rmd`: Contains the template used in the workshop.
+
+## Useful links and Additional Resources
+
+<ul>
+    <li><a href="https://shiny.rstudio.com/" target="_blank">Shiny</a></li>
+    <li><a href="https://shiny.rstudio.com/gallery/" target="_blank">Shiny Gallery</a></li>
+    <li><a href="https://pkgs.rstudio.com/flexdashboard/" target="_blank">flexdashboard</a></li>
+    <li><a href="https://pkgs.rstudio.com/flexdashboard/articles/examples.html" target="_blank">flexdashboard examples </a></li>
+</ul>
