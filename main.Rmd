@@ -1,5 +1,5 @@
 ---
-title: "Shiny Workshop ISAP"
+title: "Shiny Workshop ISPA"
 author: "Ciampitti Lab"
 output: 
   flexdashboard::flex_dashboard:
