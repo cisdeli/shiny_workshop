@@ -28,14 +28,14 @@ Inputs {.sidebar}
 ```{r}
 selectInput(
   "scatter_x_var", # Input ID
-  label = h5("X axis variable"), 
+  label = "X axis variable", 
   choices = names(iris_df)[1:4],
   selected = "Sepal.Width"
 )
 
 selectInput(
   "scatter_y_var", 
-  label = h5("Y axis variable"), 
+  label = "Y axis variable", 
   choices = names(iris_df)[1:4],
   selected = "Sepal.Length"
 )
@@ -46,14 +46,14 @@ selectInput(
 ```{r}
 selectInput(
   "hist_var", 
-  label = h5("X axis variable"), 
+  label = "X axis variable", 
   choices = names(iris_df)[1:4],
   selected = "Sepal.Length"
 )
 
 sliderInput(
   "hist_bins", 
-  label = h5("Number of bins"),
+  label = "Number of bins",
   min = 5,
   max = 50,
   value = 20
@@ -65,7 +65,7 @@ sliderInput(
 ```{r}
 selectInput(
   "boxplot_y_var", 
-  label = h5("Y axis variable"), 
+  label = "Y axis variable", 
   choices = names(iris_df)[1:4],
   selected = "Sepal.Length"
 )
