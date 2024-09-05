@@ -1,6 +1,6 @@
 ---
-title: "Shiny Workshop ISPA"
-author: "Ciampitti Lab"
+title: "Shiny Workshop 2024"
+author: "Presentation"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -18,7 +18,7 @@ iris_df <- iris
 cars_df <- mtcars
 ```
 
-Template
+Page 1
 =====================================
 
 Inputs {.sidebar}
